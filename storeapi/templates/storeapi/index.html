@@ -1,0 +1,106 @@
+{% load staticfiles %} 
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Chatbox</title>
+        <link rel="stylesheet" href="{% static 'dfchatbox/css/chatbox.css' %}">
+        <link rel="stylesheet" href="{% static 'dfchatbox/css/bootstrap.min.css' %}">
+    </head>
+    <body class="socketchatbox">
+        <div class="socketchatbox-page">
+            <div id="socketchatbox-nw" class="socketchatbox-resize"></div>
+            <div id="socketchatbox-ne" class="socketchatbox-resize"></div>
+            <div id='socketchatbox-top'>
+                <span id="toLogin">
+                    <div id='socketchatbox-username'>Uporabnik</div>   
+                    <button  id='login-logout' class="badge"> </button>
+                </span>
+
+                <div id='socketchatbox-closeChatbox'>x</div>
+                <div id='socketchatbox-showHideChatbox'>↑</div>
+
+            </div>
+
+            <div id='socketchatbox-body'>
+                <div class='socketchatbox-onlineusers'></div>
+                <div class = "socketchatbox-typing">DialogFlow is typing</div>
+
+                <div class="socketchatbox-chatArea">
+                    <ul class="socketchatbox-messages"></ul>
+                </div>
+
+                <div class = "socketchatbox-inputMessage-div">   
+                    <div id="autocomplete" style="display: none;">
+                    </div>
+
+                    <input id="inputField" class="socketchatbox-inputMessage" placeholder = "Type here..."/>
+                    <label style="text-align: center;" class="lightgray" id='socketchatbox-sendFileBtn'>
+                        <!-- <img style="margin-top: 5%;" src="{% static 'dfchatbox/img/posticon3.png' %}" alt="posticon" height="27" width="27"> -->
+                        <!-- <input id="socketchatbox-submitMessage" type="submit" style="display:none;"> -->
+                        <div style="margin-left: 35%;margin-top: 15%;" class="arrow-right"></div>
+                    </label>
+                </div>
+            </div>
+
+            <div id="login-page" style="display: none;">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Uporabniško ime</label>
+                        <input type="username" name="username" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Vnesite uporabniško ime">
+                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Geslo</label>
+                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Vnesite geslo">
+                    </div>
+                    <button id="submit" class="btn btn-primary">Prijava</button>
+                </form>
+                <p id="info" style="text-align: center;display: none;"></p>
+            </div>
+
+            <div id="logout-page" style="display: none;text-align: center;">
+                <button id="logout" class="btn btn-primary" style="margin: 0 auto;">Odjavi se</button>
+            </div>
+
+        </div>
+
+
+        <!-- image pop up bootstrap modal -->
+        <div class="modal fade" id="socketchatbox-imagepopup-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <center><img src="" id="socketchatbox-imagepopup-src"  ></center>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- admin message pop up bootstrap modal -->
+        <div class="modal fade" id="socketchatbox-msgpopup-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Received Message From Admin</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="socketchatbox-msgpopup-content">No Message</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+    <script src="{% static 'dfchatbox/js/jquery-2.2.1.min.js' %}"></script>
+    <script src="{% static 'dfchatbox/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'dfchatbox/js/chatbox.js' %}"></script>
+
+    </script>
+
+
+
+
+</html>

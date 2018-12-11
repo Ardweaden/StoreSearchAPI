@@ -15,7 +15,7 @@ class relevantAPISerializer(serializers.Serializer):
         """
         Create and return a new `API` instance, given the data.
         """
-        return Snippet.objects.create(**validated_data)
+        return API.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
         """
@@ -28,5 +28,10 @@ class relevantAPISerializer(serializers.Serializer):
         instance.version = validated_data.get('version', instance.version)
         instance.provider = validated_data.get('provider', instance.provider)
         instance.status = validated_data.get('status', instance.status)
+        instance.tags = models.TextField('tags', instance.tags)
+		instance.apiDefinition = models.TextField('apiDefinition', instance.apiDefinition)
+		instance.endpointURLs = models.TextField('endpointURLs', instance.endpointURLs)
+		instance.businessInformation = models.TextField('businessInformation', instance.businessInformation)
+		instance.keywords = models.TextField('keywords', instance.keywords)
         instance.save()
         return instance

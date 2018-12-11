@@ -3,4 +3,5 @@ from storeapi import views
 
 urlpatterns = [
     path('relevant_apis/<phrase>', views.relevant_apis),
+    path('', views.index),
 ]
