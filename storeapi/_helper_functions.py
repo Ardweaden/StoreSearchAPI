@@ -92,6 +92,10 @@ def get_tags(id,url="https://wso2.lavbic.net:9443/api/am/store/v0.11/apis/"):
 	r = requests.get(url+id)
 	return json.loads(r.text)["tags"]	
 
+def get_details(id,url="https://wso2.lavbic.net:9443/api/am/store/v0.11/apis/"):
+	r = requests.get(url+id)
+	return json.loads(r.text)
+
 def get_related_apis(apis,user_keyword):
 	related = []
 
