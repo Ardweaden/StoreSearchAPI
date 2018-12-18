@@ -2,6 +2,7 @@ import requests
 import json
 import subprocess
 import string
+from storeapi.models import API
 
 
 def get_lemmatised_word(word,path_to_python2exe="C:/python27/python.exe"):
@@ -108,10 +109,74 @@ def get_related_apis(apis,user_keyword):
 
 	return related
 
-def search(user_keyword):
+def get_related_apis_db(user_keyword):
+	"""
+	Compares user keyword with preprocessed API keywords
+
+	CHANGE IF SCORE TO BEST SCORES
+	CHANGE REPRESENTATION OF API IN OUTPUT
+	""" 
+	apis = API.objects.all()
+	related = []
+	
+	for api in apis:
+		print("API keywords are ",api.keywords)
+		words = json.loads(api.keywords)
+		score = compare_keywords(user_keyword,words)
+
+		if score:
+			related.append((score,api.name))
+
+	return related
+
+def compare_keywords(user_keywords,words,filter_short=True,cutoff=4):
+	print("Comparing user keywords in the database")
+
+	score = 0
+
+	if filter_short:
+		print("========> words:",words,"of type",type(words))
+		words = list(filter(lambda x: len(x) > 2, words))
+		user_keywords = list(filter(lambda x: len(x) > 2, user_keywords))
+		print(words,user_keywords,"\n")
+
+	for keyword in user_keywords:
+		if not keyword:
+			continue
+
+		for word in words:
+			if not word:
+				continue
+
+			similarity_score = levenshteinDistance(keyword,word)
+			print(word,keyword,similarity_score)
+
+			if similarity_score == 0:
+				score += 10
+				print(keyword,word)
+			elif keyword in word and len(keyword) >= cutoff or word in keyword and len(word) >= cutoff:
+					score += 5
+			elif similarity_score < cutoff:
+				score += 1.0/similarity_score
+
+		# if word in words:
+		# 	#print("***",word,"***")
+		# 	score += 1
+	print("Final score:",score,"\n")
+	return score
+
+def search(user_keyword,no_database=False):
 	user_keyword = get_lemmatised_list(user_keyword.lower())
-	apis = get_api_list()
-	print(apis)
-	related = get_related_apis(apis,user_keyword)
+
+	if no_database:
+		apis = get_api_list()
+		print(apis)
+		related = get_related_apis(apis,user_keyword)
+	else:
+		"""
+		Only uses precomputed data already in the database. Ideally we should create a nice hash table so we wouldn't have to compare one to one
+		"""
+		related = get_related_apis_db(user_keyword)
 
 	return sorted(related,key=lambda l:l[0],reverse=True)
+
