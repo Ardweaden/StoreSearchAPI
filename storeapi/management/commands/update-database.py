@@ -48,7 +48,7 @@ class Command(BaseCommand):
                     desc = str(api["description"]).strip()
 
                 keywords = get_lemmatised_list(str(api["name"]).strip() + " " + desc + " " + tags)
-                keywords = json.dumps(keywords)
+                35keywords = json.dumps(keywords)
 
                 API.objects.create(id=id,name=api["name"],description=api["description"],context=api["context"],version=api["version"],provider=api["provider"],status=api["status"],tags=details["tags"],apiDefinition=details["apiDefinition"],endpointURLs=details["endpointURLs"],businessInformation=details["businessInformation"],keywords=keywords)
 

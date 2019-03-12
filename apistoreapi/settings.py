@@ -127,4 +127,13 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "storeapi/static"),
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'cache_table',
+    }
+}
