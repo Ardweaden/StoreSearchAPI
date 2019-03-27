@@ -10,6 +10,8 @@ constantly==15.1.0
 defusedxml==0.5.0
 Django==2.1.4
 django-admin-bootstrapped==2.5.7
+django-rest-framework==0.1.0
+djangorestframework==3.9.1
 emit==0.4.0
 get==1.0.3
 google-api-python-client==1.6.4
@@ -25,6 +27,7 @@ numpy==1.15.0
 oauth2client==4.1.2
 oauthlib==2.0.6
 Pillow==5.2.0
+pipenv==2018.11.26
 post==1.0.2
 profiler==0.1.0
 psycopg2==2.7
@@ -47,5 +50,7 @@ sorl-thumbnail==12.3
 Twisted==18.9.0
 uritemplate==3.0.0
 urllib3==1.22
+virtualenv==16.1.0
+virtualenv-clone==0.4.0
 whitenoise==3.3.1
 zope.interface==4.6.0

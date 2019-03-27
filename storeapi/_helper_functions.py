@@ -1,3 +1,4 @@
+
 import requests
 import json
 import subprocess
@@ -14,7 +15,7 @@ def get_lemmatised_word(word,path_to_python2exe="C:/python27/python.exe"):
 	output, error = process.communicate()
 	return output.decode("latin-1")
 
-def get_lemmatised_list(string,path_to_python2exe="C:/python27/python.exe"):
+def get_lemmatised_list_old(string,path_to_python2exe="C:/python27/python.exe"):
 	script = [path_to_python2exe, "C:\\Users\\dis\\Documents\\JanJezersek\\EkoSmart\\apistoreapi\\storeapi\\_lemmatiser_script.py", string]
 	process = subprocess.Popen(" ".join(script),
 	                                        shell=True,  
@@ -22,6 +23,10 @@ def get_lemmatised_list(string,path_to_python2exe="C:/python27/python.exe"):
 
 	output, error = process.communicate()
 	return output.decode("latin-1").strip().split(" ")
+
+def get_lemmatised_list(string,path_to_python2exe="C:/python27/python.exe"):
+	data = requests.get("http://127.0.0.1:80/?phrase_list={}".format(string))
+	return json.loads(data)
 
 def get_api_list(url="https://wso2.lavbic.net:9443/api/am/store/v0.11/apis"):
 	r = requests.get(url)
