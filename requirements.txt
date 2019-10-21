@@ -20,7 +20,7 @@ idna==2.6
 imgkit==1.0.1
 incremental==17.5.0
 lxml==4.1.1
-nltk==3.4
+nltk==3.4.5
 numpy==1.15.0
 oauth2client==4.1.2
 oauthlib==2.0.6
