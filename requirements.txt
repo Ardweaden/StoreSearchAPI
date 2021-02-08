@@ -14,7 +14,7 @@ emit==0.4.0
 get==1.0.3
 google-api-python-client==1.6.4
 googletrans==2.2.0
-httplib2==0.9
+httplib2==0.19.0
 hyperlink==18.0.0
 idna==2.6
 imgkit==1.0.1
